@@ -2,7 +2,7 @@ const User = require('../models/user');
 
 module.exports.profile = function(req, res){
     return res.render('user_profile', {
-        title: 'User Profile'
+        // title: 'User Profile'
     })
 }
 
@@ -12,7 +12,7 @@ module.exports.signUp = function(req, res){
         return res.redirect('/users/profile');
     }
     return res.render('user_sign_up', {
-        title: 'Sign Up'
+        // title: 'Sign Up'
     })
 }
 //render sign in page 
@@ -21,7 +21,7 @@ module.exports.signIn = function(req, res){
         return res.redirect('/users/profile');
     }
     return res.render('user_sign_in', {
-        title: 'Sign In'
+        // title: 'Sign In'
     })
 }
 
