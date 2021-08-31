@@ -1,0 +1,12 @@
+#feed-posts {
+  height: 88.5vh;
+  width: 40vw;
+  overflow-y: scroll;
+  margin: auto;
+  background-color: antiquewhite; }
+
+body {
+  margin-top: 6vh; }
+
+#feed-posts::-webkit-scrollbar {
+  display: none; }

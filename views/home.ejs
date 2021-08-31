@@ -1,8 +1,47 @@
-<h1>MERN Book</h1>
+<link rel="stylesheet" href="/css/home.css">
+
 
 <section id="feed-posts">
+        <h1>MERN Book</h1>
+        <% if(locals.user){ %>
         <form action="/posts/create" id="new-post-form" method="POST">
-                <textarea name="content" cols="30" rows="3" placeholder="Whats on your mind ?..."></textarea>
+                <textarea name="content" cols="30" rows="3" placeholder="Whats on your mind ?..." required></textarea>
                 <input type= "submit" value="Post">
         </form>
+        <% } %>
+        <div id="posts-container">
+                <ul>
+                        <% for(post of posts){ %>
+                                <li>
+                                        <p>
+                                                <%= post.content %>
+                                                <br>
+                                        <small>
+                                                <%= post.user.name %>
+                                        </small>
+                                        <ul id="post-comments-<%= post._id %>">
+                                                <% for(comment of post.comments){ %>
+                                                        <li>
+                                                                <p><%= comment.content %>
+                                                                <br>
+                                                                <small>
+                                                                        <%= comment.user.name %>
+                                                                </small>
+                                                                </p>
+                                                        </li>
+                                                <% } %>
+                                                
+                                        </ul>
+                                        <% if(locals.user){ %>
+                                                <form action="/comments/create" method="POST">
+                                                        <input type="text" name="content" placeholder="Type Comment Here..." required></input>
+                                                        <input type="hidden" name="post" value="<%= post._id %>">
+                                                        <input type= "submit" value="Post">
+                                                </form>
+                                                <% } %>
+                                        </p>
+                                </li>
+                        <% } %>
+                </ul>
+        </div>
 </section>
