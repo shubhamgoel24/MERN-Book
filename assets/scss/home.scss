@@ -2,6 +2,7 @@
     height: 88.5vh;
     width: 40vw;
     overflow-y: scroll;
+    display: inline-block;
     margin: auto;
     background-color: antiquewhite;
 }
@@ -11,3 +12,10 @@ body{
 #feed-posts::-webkit-scrollbar {
     display: none;
   }
+
+#user-friends{
+    width: 30vw;
+    display: inline-block;
+    position: absolute;
+    right: 5px;
+}

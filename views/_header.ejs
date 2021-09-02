@@ -2,7 +2,7 @@
         <div><a href="/">MERN Book</a></div>
         <div>
             <% if(locals.user){ %>
-                <a href="/users/profile"><%= user.name %></a>
+                <a href="/users/profile/<%= user.id %>"><%= user.name %></a>
                 <a href="/users/sign-out">Sign Out</a> </li>
             <% }else{ %>
                 <a href="/users/sign-in">Sign In</a>

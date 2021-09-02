@@ -12,41 +12,20 @@
         <div id="posts-container">
                 <ul>
                         <% for(post of posts){ %>
-                                <li>
-                                        <p>
-                                                <% if((locals.user) && (locals.user.id == post.user.id)){ %>
-                                                        <small>
-                                                                <a href="/posts/destroy/<%= post.id %>">X</a>
-                                                        </small>        
-                                                <% } %>
-                                                <%= post.content %>
-                                                <br>
-                                        <small>
-                                                <%= post.user.name %>
-                                        </small>
-                                        <ul id="post-comments-<%= post._id %>">
-                                                <% for(comment of post.comments){ %>
-                                                        <li>
-                                                                <p><%= comment.content %>
-                                                                <br>
-                                                                <small>
-                                                                        <%= comment.user.name %>
-                                                                </small>
-                                                                </p>
-                                                        </li>
-                                                <% } %>
-                                                
-                                        </ul>
-                                        <% if(locals.user){ %>
-                                                <form action="/comments/create" method="POST">
-                                                        <input type="text" name="content" placeholder="Type Comment Here..." required></input>
-                                                        <input type="hidden" name="post" value="<%= post._id %>">
-                                                        <input type= "submit" value="Post">
-                                                </form>
-                                                <% } %>
-                                        </p>
-                                </li>
+                                <!-- Partials -->
+                                <%- include('_posts') -%> 
                         <% } %>
                 </ul>
         </div>
+</section>
+
+<section id="user-friends">
+        <h2>Friends</h2>
+        <% for(u of all_users){ %>
+                <p>
+                        <a href="/users/profile/<%= u.id %>">
+                                <%= u.name %>
+                        </a>
+                </p>
+        <% } %>
 </section>
