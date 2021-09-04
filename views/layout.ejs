@@ -2,7 +2,8 @@
 <html>
     <head>
         <title>MERN Book</title>
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
         <link rel="stylesheet" href="/css/layout.css">
         <link rel="stylesheet" href="/css/header.css">
         <link rel="stylesheet" href="/css/footer.css">
@@ -11,11 +12,37 @@
     <body>
         <%- include('_header'); %>
         
+       
+
         <%- body %>
 
         <%- include('_footer'); %>
 
         <%- script %>
+        <script>
+            <% if(flash.success && flash.success.length>0 ){ %>
+            new Noty({
+                type: 'success',
+                layout: 'topCenter',
+                theme: 'relax',
+                text: '<%= flash.success %>',
+                timeout: '500',
+                progressBar : false
+            }).show();
+            <% } %>
+
+            <% if(flash.error && flash.error.length>0 ){ %>
+            new Noty({
+                type: 'error',
+                layout: 'topCenter',
+                theme: 'relax',
+                text: '<%= flash.error %>',
+                timeout: '500',
+                progressBar : false
+            }).show();
+            <% } %>
+            
+        </script>
         <script src="https://kit.fontawesome.com/71fe6befa9.js" crossorigin="anonymous"></script>
     </body>
 </html>
