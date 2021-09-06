@@ -9,38 +9,39 @@
                 url: '/posts/create',
                 data: newPostForm.serialize(),
                 success: function(data){
-                    let newPost = newPostDom(data.data.post);
+                    let newPost = newPostDom(data.data);
                     $('#posts-container>ul').prepend(newPost);
                     deletePost($(' .delete-post-button',newPost));
                 },error: function(error){
                     console.log(error.responseText);
                 }
             });
+            $('#postdata').val('');
         });
 
     }
 
     //method to create a post in dom
     let newPostDom = function(post){
-        return $(`<li id="post-${post._id}">
+        return $(`<li id="post-${post.post._id}">
                     <p>
                         <small>
-                            <a class="delete-post-button" href="/posts/destroy/${post._id}">X</a>
+                            <a class="delete-post-button" href="/posts/destroy/${post.post._id}">X</a>
                         </small>
-                        ${post.content}
+                        ${post.post.content}
                         <br>
 
                         <small>
                             ${post.user.name}
                         </small>
 
-                        <ul id="post-comments-${post._id}">
+                        <ul id="post-comments-${post.post._id}">
                                
                         </ul>
 
                         <form action="/comments/create" method="POST">
                             <input type="text" name="content" placeholder="Type Comment Here..." required></input>
-                            <input type="hidden" name="post" value="${post._id}">
+                            <input type="hidden" name="post" value="${post.post._id}">
                             <input type= "submit" value="Post">
                         </form>
                     </p>
