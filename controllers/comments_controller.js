@@ -1,6 +1,6 @@
 const Comment = require('../models/comment');
 const Post = require('../models/post');
-
+const User = require('../models/user');
 
 module.exports.create= async function(req,res){
     try{
@@ -11,11 +11,21 @@ module.exports.create= async function(req,res){
                 post:req.body.post,
                 user: req.user._id
             });
-            post.comments.push(comment);
+            post.comments.unshift(comment);
             post.save();
+            if(req.xhr){
+                comment = await comment.populate('user', 'name');
+                return res.status(200).json({
+                    data: {
+                        comment : comment
+                    },
+                    message: "Comment Created!"
+                }); 
+            }
+            
             res.redirect('/');
         }
-    }catch{
+    }catch(err){
         console.log("Error:", err);
         return;
     }
@@ -29,6 +39,14 @@ module.exports.destroy = async function(req,res){
             let postId = comment.post;
             comment.remove();
             let post = await Post.findByIdAndUpdate(postId, {$pull: {comment: req.params.id}});
+            if(req.xhr){
+                return res.status(200).json({
+                    data:{
+                        comment_id:req.params.id
+                    },
+                    message: "Comment deleted sucessfully"
+                })
+            }
             return res.redirect(`back`);
         }
         else{
