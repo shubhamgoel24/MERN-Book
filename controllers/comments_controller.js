@@ -22,6 +22,7 @@ module.exports.create= async function(req,res){
                     message: "Comment Created!"
                 }); 
             }
+            req.flash('success', 'Comment published!');
             
             res.redirect('/');
         }
