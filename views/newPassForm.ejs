@@ -1,0 +1,13 @@
+<h1>Password Reset</h1>
+<br>
+<p>
+    Hello <%= data.user.name %>
+    <br>
+    Enter New Password
+</p>
+<form action="/resetpass/submit" method="POST">
+    <input type="password" name="password" placeholder="Password" required>
+    <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+    <input type="hidden" name="token" value="<%= data.accessToken %>">
+    <input type= "submit" value="Submit">
+</form>

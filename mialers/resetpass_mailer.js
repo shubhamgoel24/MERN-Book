@@ -1,13 +1,13 @@
 const nodeMialer = require('../config/nodemailer');
 
 //this is another way of exporting a method
-exports.newComment = (comment) => {
-    let htmlString = nodeMialer.renderTemplate({comment: comment}, '/comments/new_comment.ejs');
-
+exports.passReset = (data) => {
+    let htmlString = nodeMialer.renderTemplate({data: data}, '/passReset/newPassword_Reset.ejs');
+    
     nodeMialer.transporter.sendMail({
         from: 'support@menbook.com',
-        to: comment.user.email,
-        subject: "New Comment Published",
+        to: data.user.email,
+        subject: "Password Reset",
         html: htmlString
     }, (err,info) => {
         if(err){
