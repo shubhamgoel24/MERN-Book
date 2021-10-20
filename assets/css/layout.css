@@ -2,4 +2,6 @@ body {
   margin: 0;
   margin-top: 10vh;
   text-align: center;
-  clear: both; }
+  clear: both;
+  background-color: black;
+  color: white; }

@@ -12,6 +12,7 @@
                     let newPost = newPostDom(data.data.post);
                     $('#posts-list-container>ul').prepend(newPost);
                     deletePost($(' .delete-post-button', newPost));
+                    addclass($(' .newPost'), newPost);
 
                     // call the create comment class
                     new PostComments(data.data.post._id);
@@ -32,6 +33,12 @@
         });
     }
 
+    let addclass = function(data){
+        let self = data;
+        let toggleLike = new ToggleLike(self);
+        data.removeClass('newPost');
+    }
+
 
     // method to create a post in DOM
     let newPostDom = function(post){
@@ -44,6 +51,12 @@
                         <br>
                         <small>
                             ${ post.user.name }
+                        </small>
+                        <br>
+                        <small>
+                            <a class="toggle-like-button newPost" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post">
+                                0 Likes
+                            </a>
                         </small>
                     </p>
                     <div class="post-comments">
