@@ -10,6 +10,7 @@ router.use('/posts', require('./posts'));
 router.use('/comments', require('./comments'));
 router.use('/resetpass', require('./resetpass'));
 router.use('/likes', require('./likes'));
+router.use('/friend', require('./friendship'));
 
 router.use('/api', require('./api'));
 

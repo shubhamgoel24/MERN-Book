@@ -17,10 +17,19 @@ module.exports.home = async function(req,res){
             }
         }).populate('likes');
         let users = await User.find({});
-        return res.render('home', {
-            posts : posts,
-            all_users : users
-        });
+        if(req.isAuthenticated()){
+            let friends = await User.findById(req.user.id).populate('friendList', 'name');
+            return res.render('home', {
+                posts : posts,
+                all_users : users,
+                friends : friends.friendList
+            });
+        }else{
+            return res.render('home', {
+                posts : posts,
+                all_users : users
+            });
+        }
     }catch(err){
         console.log("Error:", err);
         return;

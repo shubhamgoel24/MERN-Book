@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="/css/user_profile.css">
       <h1>MERN Book Profile page</h1>
 
-<img src="<%= user.avatar %>" alt="<%= user.name %>" width="100">
+<img src="<%= profile_user.avatar %>" alt="<%= profile_user.name %>" width="100">
 
 <% if(user.id == profile_user.id){ %>
       <form action="/users/update/<%= profile_user.id %>" enctype="multipart/form-data" method="POST">
@@ -14,4 +14,23 @@
 <% }else{ %>
       <p> <%= profile_user.name %> </p>
       <p> <%= profile_user.email %> </p>
+
+      <br>
+      <p>
+            <% 
+                  let y=false;
+                  for(x of profile_user.friendList){
+                        if(x==user.id){
+                              y=true;
+                        }
+                  }
+            %>
+            <% if(y){ %>
+                  <a href="/friend/delreq/<%= profile_user.id %>" id="friendReqBut">Remove Friend</a>
+            <% }else{ %>
+                  <a href="/friend/newreq/<%= profile_user.id %>" id="friendReqBut">Add Friend</a>
+            <% } %>
+      </p> 
 <% } %>
+
+<script src="/js/friend_request.js"></script>

@@ -2,13 +2,22 @@ const User = require('../models/user');
 const fs = require('fs');
 const path = require('path');
 
-module.exports.profile = function(req, res){
-    User.findById(req.params.id, function(err,user){
-        return res.render('user_profile', {
-            // title: 'User Profile'
-            profile_user : user
-        });
-    });
+module.exports.profile = async function(req, res){
+    try{
+        let user = await User.findById(req.params.id);
+        if(user){
+            return res.render('user_profile', {
+                // title: 'User Profile'
+                profile_user : user
+            });
+        }
+    }catch(err){
+        if(err){
+            console.log(err);
+        }
+        req.flash('error', 'Invalid Link');
+        return res.redirect('/');
+    }
 }
 
 module.exports.update = async function(req, res){
