@@ -1,21 +1,13 @@
 
 module.exports.chatSockets = function(socketServer){
-    // const io = require("socket.io")(socketServer, {
-    //     cors: {
-    //       origin: "http://localhost:5000",
-    //       methods: ["GET", "POST"],
-    //       credentials: true
-    //     }
-    //   });
     const io = require("socket.io")(socketServer, 
         { 
         cors: {    
-          origin: "http://localhost:5000",    
-          methods: ["GET", "POST"]  
+          origin: "http://localhost:8000"
         }});
     // let io = require('socket.io')(socketServer);
 
-    io.sockets.on('connection', function(socket){
+    io.on('connection', function(socket){
         console.log('New connection received ',socket.id);
 
         socket.on('disconnect', function(){
@@ -26,8 +18,13 @@ module.exports.chatSockets = function(socketServer){
             console.log('Joining request received ', data);
             socket.join('data.chatroom');
 
-            io.in(data.chatroom).emit('user_joined ', data);
+            io.emit('user_joined', data);
+            // io.to(data.chatroom).emit('user_joined', data); (Original)
         });
+        socket.on('send_message', function(data){
+            io.emit('receive_message',data);
+            // io.in(data.chatroom).emit('receive_message',data);
+        })
 
     });
 }

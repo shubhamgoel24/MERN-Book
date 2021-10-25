@@ -1,5 +1,6 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
+var cors = require('cors')
 const app = express();
 const port = 8000;
 const expressLayouts = require('express-ejs-layouts'); 
@@ -22,6 +23,7 @@ const chatSockets = require('./config/chat_sockets').chatSockets(chatServer);
 chatServer.listen(5000);
 console.log("Chat server is listening on port 5000")
 
+app.use(cors());
 
 app.use(sassMiddleware({
     src: './assets/scss',
