@@ -3,5 +3,9 @@ body {
   margin-top: 10vh;
   text-align: center;
   clear: both;
-  background-color: black;
-  color: white; }
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: top;
+  background-image: url("../images/back.jpg");
+  color: black; }
