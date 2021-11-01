@@ -1,4 +1,6 @@
 const express = require('express');
+const path = require('path');
+const env = require('./config/environment');
 const cookieParser = require('cookie-parser');
 var cors = require('cors')
 const app = express();
@@ -16,27 +18,28 @@ const MongoStore = require('connect-mongo');
 const sassMiddleware = require('node-sass-middleware');
 const flash = require('connect-flash');
 const customMware = require('./config/middleware');
+const development = require('./config/environment');
 
 //setup chat server to be used with socket.io
 const chatServer = require('http').Server(app);
 const chatSockets = require('./config/chat_sockets').chatSockets(chatServer);
 chatServer.listen(5000);
 console.log("Chat server is listening on port 5000")
-
 app.use(cors());
 
-app.use(sassMiddleware({
-    src: './assets/scss',
-    dest: './assets/css',
-    debug: false,
-    outputStyle: 'extended',
-    prefix: '/css'
-}));
-
+if(env.name == 'development'){
+    app.use(sassMiddleware({
+        src: path.join(__dirname, env.asset_path, 'scss'),
+        dest: path.join(__dirname, env.asset_path, 'css'),
+        debug: true,
+        outputStyle: 'extended',
+        prefix: '/css'
+    }));
+}
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 
-app.use(express.static('./assets'));
+app.use(express.static(env.asset_path));
 //make the uploads path available to the browser
 app.use('/uploads', express.static(__dirname + '/uploads'));
 
@@ -54,7 +57,7 @@ app.set('views', './views');
 app.use(session({
     name: 'codial',
     //todo change secret before deploy
-    secret: 'blahsomething',
+    secret: env.session_cookie_key,
     saveUninitialized: false,
     resave: false,
     cookie: {

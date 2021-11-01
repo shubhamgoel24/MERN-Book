@@ -97,6 +97,7 @@ module.exports.create = function(req, res){
             });
         }
         else{
+            req.flash('error', 'User already exists !');
             return res.redirect('back');
         }
     });

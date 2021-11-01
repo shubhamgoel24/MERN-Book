@@ -27,6 +27,7 @@ class PostComments{
                     let newComment = pSelf.newCommentDom(data.data.comment);
                     $(`#post-comments-${postId}`).prepend(newComment);
                     pSelf.deleteComment($(' .delete-comment-button',newComment));
+                    likeToggle($(' .newComment'), newComment);
 
                     new Noty({
                         theme: 'relax',
@@ -45,13 +46,14 @@ class PostComments{
         $('.commentData').val('')
     }
 
+
     //method to create comment in dom
     newCommentDom(comment){
-        return $(`<li id="comment-${comment._id}">
+        return $(`<li id="comment-${comment._id}">        
+                    <p>
                     <small>
                             <a  class="delete-comment-button" href="/comments/destroy/${comment._id}">X</a>
-                    </small>        
-                    <p>
+                    </small>
                     ${comment.content}
                     <br>
                     <small>
@@ -59,7 +61,7 @@ class PostComments{
                     </small>
                     <br>
                     <small>
-                        <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${comment._id}&type=Comment">
+                        <a class="toggle-like-button newComment" data-likes="0" href="/likes/toggle/?id=${comment._id}&type=Comment">
                             0 Likes
                         </a>
                     </small>
@@ -93,4 +95,10 @@ class PostComments{
             });
         });
     }
+}
+
+let likeToggle = function(data){
+    let self = data;
+    let toggleLike = new ToggleLike(self);
+    data.removeClass('newPost');
 }

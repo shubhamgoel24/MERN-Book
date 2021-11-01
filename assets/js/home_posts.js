@@ -12,7 +12,7 @@
                     let newPost = newPostDom(data.data.post);
                     $('#posts-list-container>ul').prepend(newPost);
                     deletePost($(' .delete-post-button', newPost));
-                    addclass($(' .newPost'), newPost);
+                    likeToggle($(' .newPost'), newPost);
 
                     // call the create comment class
                     new PostComments(data.data.post._id);
@@ -33,7 +33,7 @@
         });
     }
 
-    let addclass = function(data){
+    let likeToggle = function(data){
         let self = data;
         let toggleLike = new ToggleLike(self);
         data.removeClass('newPost');
