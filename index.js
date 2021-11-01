@@ -59,7 +59,7 @@ app.set('views', './views');
 
 //mongo store is used to store the session cookies in the db
 app.use(session({
-    name: 'codial',
+    name: 'mernbook',
     //todo change secret before deploy
     secret: env.session_cookie_key,
     saveUninitialized: false,
