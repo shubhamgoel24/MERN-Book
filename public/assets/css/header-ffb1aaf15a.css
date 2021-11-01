@@ -1,0 +1,24 @@
+header {
+  background-color: black;
+  color: white;
+  position: fixed;
+  top: 0px;
+  display: flex;
+  width: 99vw;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 0;
+  padding: 0.5vw; }
+  header div {
+    font-size: x-large;
+    justify-self: flex-start; }
+  header a {
+    text-decoration: none;
+    align-self: right;
+    color: aqua;
+    font-size: 1.2rem;
+    margin-left: 5px;
+    border: 1px gray solid; }
+    header a:hover {
+      color: white; }
