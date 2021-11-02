@@ -1,5 +1,3 @@
 node_modules/
 config/environment2.js
 production_logs/
-public/
-uploads/
