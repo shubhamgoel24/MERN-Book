@@ -3,7 +3,7 @@ class ChatEngine{
         this.chatBox = $(`#${chatBoxId}`);
         this.userEmail = userEmail;
 
-        this.socket = io.connect('http://52.66.244.7.nip.io:5000');
+        this.socket = io.connect('https://mern--book.herokuapp.com:5000');
         // const io = require("socket.io-client");
         // this.socket = io("http://localhost:5000", {
         // withCredentials: true,
