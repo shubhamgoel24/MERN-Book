@@ -68,7 +68,7 @@ app.use(session({
         maxAge: (1000 * 60 * 100)
     },
     store: MongoStore.create({
-        mongoUrl: 'process.env.MERNBOOK_DB',
+        mongoUrl: process.env.MERNBOOK_DB,
         mongooseConnection: db,
         autoRemove: 'disabled'
     },
