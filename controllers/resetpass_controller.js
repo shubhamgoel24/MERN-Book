@@ -1,8 +1,9 @@
 const User = require('../models/user');
 const Reset = require('../models/resetpass');
 const crypto = require('crypto');
-const queue = require('../config/kue');
+// const queue = require('../config/kue');
 const resetPassEmailWorker = require('../workers/newResetPass_email_worker');
+const resetPassMailer = require('../mialers/resetpass_mailer');
 
 
 module.exports.home = async function(req,res){
@@ -34,13 +35,15 @@ module.exports.passmail= async function(req,res){
             }
             resetpass = await resetpass.populate('user', 'name email');
             
-            let job = queue.create('passResetMails', resetpass).save(function(err){
-                if(err){
-                    console.log("Error in creating queue", err);
-                    return;
-                }
-                // console.log(job.id);
-            })
+            // let job = queue.create('passResetMails', resetpass).save(function(err){
+            //     if(err){
+            //         console.log("Error in creating queue", err);
+            //         return;
+            //     }
+            //     // console.log(job.id);
+            // });
+            resetPassMailer.passReset(resetpass);
+
 
             req.flash('success', 'Password Reset Mail Sent');
             
