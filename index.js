@@ -27,8 +27,8 @@ const fs = require('fs');
 
 //setup chat server to be used with socket.io
 const chatServer = require('https').createServer({
-    key:fs.readFileSync('../../../etc/letsencrypt/live/mernbook.eastus.cloudapp.azure.com/privkey.pem'),
-    cert:fs.readFileSync('../../../etc/letsencrypt/live/mernbook.eastus.cloudapp.azure.com/fullchain.pem'),
+    key:fs.readFileSync('./privkey.pem'),
+    cert:fs.readFileSync('./fullchain.pem'),
 },app);
 const chatSockets = require('./config/chat_sockets').chatSockets(chatServer);
 chatServer.listen(5000);
