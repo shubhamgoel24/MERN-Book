@@ -9,10 +9,10 @@ const del = require('del');
 
 gulp.task('css',function(done){
     console.log('Minifying css..');
-    gulp.src('./assets/sass/**/*.sass')
+    gulp.src('./assets/scss/**/*.scss')
     .pipe(sass())
     .pipe(cssnano())
-    .pipe(gulp.dest('./assets.css'));
+    .pipe(gulp.dest('./assets/css'));
 
     gulp.src('./assets/**/*.css')
     .pipe(rev())

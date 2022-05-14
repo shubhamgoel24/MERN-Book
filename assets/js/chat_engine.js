@@ -3,11 +3,12 @@ class ChatEngine{
         this.chatBox = $(`#${chatBoxId}`);
         this.userEmail = userEmail;
 
-        this.socket = io.connect('https://mernbook.shubhamgoel.tech:5000');
+        // this.socket = io.connect('https://mernbook.shubhamgoel.tech:5000');
+        // this.socket = io.connect('http://localhost:5000');
         // const io = require("socket.io-client");
-        // this.socket = io("http://localhost:5000", {
-        // withCredentials: true,
-        // });
+        this.socket = io.connect("http://localhost:5000", {
+        withCredentials: true,
+        });
 
         if(this.userEmail){
             this.connectionHandler();
