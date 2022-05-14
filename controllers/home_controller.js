@@ -3,6 +3,10 @@ const User = require('../models/user');
 
 module.exports.home = async function(req,res){
     try{
+        if(! req.isAuthenticated()){
+            req.flash('error', 'Please Login First');
+            return res.redirect('/users/sign-in');
+        }
         //populate the user of each post
         let posts = await Post.find({})
         .sort('-createdAt')

@@ -1,13 +1,73 @@
+<link rel="stylesheet" href="<%= assetPath('css/sign_in.css') %>">
+
 <h1>User Sign Up</h1>
 
-<form action="/users/create" method="POST">
+<div class="Login" id='Login'>
+    <div class="container-fluid auth-container">
+        <form action="/users/create" method="POST">
+            <div class="row toggle-row">
+                <a href="/users/sign-in" class='col-6 togButtons'>Sign In</a>
+                <a href="/users/sign-up" class='col-6 ActiveToggle togButtons'>Sign Up</a>
+            </div>
+
+            <div class='row align-items-center'>
+                <div class='col-1'>
+                    <i  class="fas fa-user"></i>
+                </div>
+                <div class='col-10'>
+                    <input type="text" name="name" placeholder="Your Name" required>
+                </div>
+            </div>
+
+            <div class='row align-items-center'>
+                <div class='col-1'>
+                    <i class="fa-solid fa-envelope"></i>
+                </div>
+                <div class='col-10'>
+                    <input type="email" name="email" placeholder="Email" required>
+                </div>
+            </div>
+
+            <div class='row align-items-center'>
+                <div class='col-1'>
+                    <i class="fas fa-key"></i>
+                </div>
+                <div class='col-10'>
+                    <input type="password" name="password" placeholder="Password" required>
+                </div>
+            </div>
+
+            <div class='row align-items-center'>
+                <div class='col-1'>
+                    <i class="fas fa-key"></i>
+                </div>
+                <div class='col-10'>
+                    <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+                </div>
+            </div>
+
+            <div class='row align-items-center justify-content-center'>
+                <div class='col-11'>
+                    <input class='Submit-Button' type="submit" value="Sign Up">
+                </div>
+            </div>
+        </form>
+
+        <a class="row align-items-center justify-content-center Google-Button" href="/users/auth/google">
+            <div class='col'>
+                <i class="fa-brands fa-google"></i>
+            <!-- </div>
+            <div class='col'> -->
+                Use Google Login
+            </div>
+        </a>
+
+    </div>
+</div>
+<!-- <form action="/users/create" method="POST">
     <input type="text" name="name" placeholder="Your Name" required>
     <input type="email" name="email" placeholder="Email" required>
     <input type="password" name="password" placeholder="Password" required>
     <input type="password" name="confirm_password" placeholder="Confirm Password" required>
     <input type="submit" value="Sign Up">
-</form>
- 
-<p>
-    <a href="/users/auth/google">Google SignIn / SignUp</a>
-</p>
+</form> -->

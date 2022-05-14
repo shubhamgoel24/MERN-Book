@@ -2,13 +2,11 @@ class ChatEngine{
     constructor(chatBoxId, userEmail){
         this.chatBox = $(`#${chatBoxId}`);
         this.userEmail = userEmail;
-
+        // For Hosting
         // this.socket = io.connect('https://mernbook.shubhamgoel.tech:5000');
-        // this.socket = io.connect('http://localhost:5000');
-        // const io = require("socket.io-client");
-        this.socket = io.connect("http://localhost:5000", {
-        withCredentials: true,
-        });
+        
+        // For Development
+        this.socket = io.connect("http://localhost:5000");
 
         if(this.userEmail){
             this.connectionHandler();
@@ -31,36 +29,50 @@ class ChatEngine{
             });
         });
 
-        $('#send-message').click(function(){
-            let msg = $('#chat-message-input').val();
-            if(msg != ''){
-                self.socket.emit('send_message',{
-                    message: msg,
-                    user_email: self.userEmail,
-                    chatroom: 'mernbook'
-                });
-            }
-        });
+        // $('#send-message').click(function(){
+        //     let msg = $('#chat-message-input').val();
+        //     if(msg != ''){
+        //         self.socket.emit('send_message',{
+        //             message: msg,
+        //             user_email: self.userEmail,
+        //             chatroom: 'mernbook'
+        //         });
+        //     }
+        // });
+        
 
         self.socket.on('receive_message', function(data){
-            console.log(data);
-
             let newMessage = $('<li>');
             let messageType = 'other-message';
 
             if(data.user_email == self.userEmail){
                 messageType = 'self-message';
             }
-
-            newMessage.append($('<span>',{
-                'html': data.message
-            }));
             newMessage.append($('<sub>',{
                 'html': data.user_email
             }));
+            newMessage.append($('<span>',{
+                'html': data.message
+            }));
+            
             newMessage.addClass(messageType);
 
             $('#chat-messages-list').append(newMessage);
-        })
+            var elem = document.getElementById('chat-messages-list');
+            elem.scrollTop = elem.scrollHeight;
+        });
+    }
+    send_message(e){
+        e.preventDefault();
+        let msg = $('#chat-message-input').val();
+        $('#chat-message-input').val('');
+        if(msg != ''){
+            this.socket.emit('send_message',{
+                message: msg,
+                user_email: this.userEmail,
+                chatroom: 'mernbook'
+            });
+        }
+        return false;
     }
 }

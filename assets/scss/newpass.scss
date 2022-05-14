@@ -1,0 +1,50 @@
+.auth-container {
+    padding-top: 3px;
+    margin-top: 15vh;
+    width: 35vw;
+    min-width: 300px;
+    height: fit-content;
+    background-color: transparent;
+    border-radius: 25px;
+    text-align: center;
+    border: 1px gray solid;
+    font-size: 20px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+    .row{
+        margin-top: 10px;
+        .col-10 input{
+            margin-top: 4%;
+            width: 100%;
+            /* background-color: #3d3b3b; */
+            background-color: transparent;
+            border: 1px gray solid;
+            color: white;
+            outline: none;
+            border: none;
+            border-bottom: 1px solid white;
+        }
+    }
+}
+
+.toggle-row{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 40px;
+}
+
+.Submit-Button{
+    margin-top: 4%;
+    width: 100%;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid white;
+    background-color: #0d7e65;
+    margin-bottom: 5px;
+    color: white;
+    border-radius: 20px;
+    &:hover{
+        color: black;
+    }
+}

@@ -1,6 +1,23 @@
+<link rel="stylesheet" href="<%= assetPath('css/resetpass.css') %>">
 <h1>Password Reset</h1>
 
-<form action="/resetpass/email" method="POST">
+<div class="container-fluid userprofilecontainer">
+    <form action="/resetpass/email" method="POST">
+        <div class="row align-items-center justify-content-center">
+            <div class='col-1'>
+                <i  class="fas fa-user"></i>
+            </div>
+            <div class='col-10'>
+                <input class="updatedata" type="email" name="email" placeholder="Enter Your Email" required>
+            </div>
+        </div>
+          
+        <div class="row align-items-center justify-content-center">
+            <input id="updatebut" type="submit" value="Submit">
+        </div>
+    </form>
+</div>
+<!-- <form action="/resetpass/email" method="POST">
     <input type="email" name="email" placeholder="Enter Your Email" required>
     <input type="submit" value="Submit">
-</form>
+</form> -->

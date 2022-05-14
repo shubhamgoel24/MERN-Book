@@ -1,1 +1,0 @@
-header{background-color:#000;color:#fff;position:fixed;top:0;display:flex;width:99vw;flex-direction:row;justify-content:space-between;align-items:baseline;margin:0;padding:.5vw}header div{font-size:x-large;justify-self:flex-start}header a{text-decoration:none;align-self:right;color:aqua;font-size:1.2rem;margin-left:5px;border:1px solid gray}header a:hover{color:#fff}

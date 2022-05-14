@@ -1,36 +1,94 @@
 <link rel="stylesheet" href="<%= assetPath('css/user_profile.css') %>">
-      <h1>MERN Book Profile page</h1>
-
-<img src="<%= profile_user.avatar %>" alt="<%= profile_user.name %>" width="100">
+      <h1><%= profile_user.name %>'s Profile</h1>
 
 <% if(user.id == profile_user.id){ %>
-      <form action="/users/update/<%= profile_user.id %>" enctype="multipart/form-data" method="POST">
+      <div class="container-fluid userprofilecontainer">
+            <form action="/users/update/<%= profile_user.id %>" enctype="multipart/form-data" method="POST">
+                  <div class="row align-items-center justify-content-center">
+                        <div class="col-6">
+                              <div class="row align-items-center justify-content-end">
+                                    <div id="imgcircle" >
+                                          <% if(profile_user.avatar){ %>
+                                                <img src="<%= profile_user.avatar %>" alt="<%= profile_user.name %>" width="100">
+                                          <% }else{ %>
+                                                <i class="fa-solid fa-user"></i>
+                                          <% } %>
+                                    </div>
+                              </div>
+                              
+                        </div>
+                        <div class="col-6">
+                              <div class="row">
+                                    <input class="updatedata" type="text" name="name" placeholder="Your Name" value="<%= profile_user.name %>" required>
+                              </div>
+                              <div class="row">
+                                    <input class="updatedata" type="email" name="email" placeholder="Your Email" value="<%= profile_user.email %>" required>
+                              </div>
+                              <div class="row">
+                                    <label for="files" id="imglabel" class="updatedata">Select Proflie Picture</label>
+                                    <input id="files" style="visibility:hidden;" type="file" name="avatar" placeholder="Profile Picture">
+                              </div>
+                        </div>
+                  </div>
+                  
+                  <div class="row align-items-center justify-content-center">
+                        <input id="updatebut" type="submit" value="Update">
+                  </div>
+            </form>
+      </div>
+
+      <!-- <form action="/users/update/<%= profile_user.id %>" enctype="multipart/form-data" method="POST">
             <input type="text" name="name" placeholder="Your Name" value="<%= profile_user.name %>" required>
             <input type="email" name="email" placeholder="Your Email" value="<%= profile_user.email %>" required>
 
             <input type="file" name="avatar" placeholder="Profile Picture">
             <input type="submit" value="Update">
-      </form>
+      </form> -->
 <% }else{ %>
-      <p> <%= profile_user.name %> </p>
-      <p> <%= profile_user.email %> </p>
-
-      <br>
-      <p>
-            <% 
-                  let y=false;
-                  for(x of profile_user.friendList){
-                        if(x==user.id){
-                              y=true;
+      <div class="container-fluid userprofilecontainer">
+            <div class="row align-items-center justify-content-center">
+                  <div class="col-6">
+                        <div class="row align-items-center justify-content-end">
+                              <div id="imgcircle" >
+                                    <% if(profile_user.avatar){ %>
+                                          <img src="<%= profile_user.avatar %>" alt="<%= profile_user.name %>" width="100">
+                                    <% }else{ %>
+                                          <i class="fa-solid fa-user"></i>
+                                    <% } %>
+                              </div>
+                        </div>
+                        
+                  </div>
+                  <div class="col-6">
+                        <div class="row">
+                              <%= profile_user.name %>
+                        </div>
+                        <div class="row">
+                              <%= profile_user.email %>
+                        </div>
+                  </div>
+            </div>
+            <div class="row align-items-center justify-content-center">
+                  <% 
+                        let y=false;
+                        for(x of profile_user.friendList){
+                              if(x==user.id){
+                                    y=true;
+                              }
                         }
-                  }
-            %>
-            <% if(y){ %>
-                  <a href="/friend/delreq/<%= profile_user.id %>" id="friendReqBut">Remove Friend</a>
-            <% }else{ %>
-                  <a href="/friend/newreq/<%= profile_user.id %>" id="friendReqBut">Add Friend</a>
-            <% } %>
-      </p> 
+                  %>
+                  <% if(y){ %>
+                        <a class="col-6" href="/friend/delreq/<%= profile_user.id %>" id="friendReqBut">Remove Friend</a>
+                  <% }else{ %>
+                        <a class="col-6" href="/friend/newreq/<%= profile_user.id %>" id="friendReqBut">Add Friend</a>
+                  <% } %>
+            </div>
+      </div>
 <% } %>
-
+<script>
+      $("#files").change(function() {
+            filename = this.files[0].name;
+            $("#imglabel").html(filename);
+      });
+</script>
 <script src="<%= assetPath('js/friend_request.js') %>"></script>

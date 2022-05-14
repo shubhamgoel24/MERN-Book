@@ -1,13 +1,62 @@
+<link rel="stylesheet" href="<%= assetPath('css/sign_in.css') %>">
+
 <h1>User Sign In</h1>
 
-<form action="/users/create-session" method="POST">
+<div class="Login" id='Login'>
+    <div class="container-fluid auth-container">
+        <form action="/users/create-session" method="POST">
+            <div class="row toggle-row">
+                <a href="/users/sign-in" class='col-6 ActiveToggle togButtons'>Sign In</a>
+                <a href="/users/sign-up" class='col-6 togButtons'>Sign Up</a>
+            </div>
+
+            <div class='row align-items-center'>
+                <div class='col-1'>
+                    <i  class="fas fa-user"></i>
+                </div>
+                <div class='col-10'>
+                    <input type="email" name="email" placeholder="Email" required>
+                </div>
+            </div>
+
+            <div class='row align-items-center'>
+                <div class='col-1'>
+                    <i class="fas fa-key"></i>
+                </div>
+                <div class='col-10'>
+                    <input type="password" name="password" placeholder="Password" required>
+                </div>
+            </div>
+
+            <div class='row align-items-center justify-content-center'>
+                <div class='col-11'>
+                    <input class='Submit-Button' type="submit" value="Sign In">
+                </div>
+            </div>
+        </form>
+
+        <div class='row align-items-center justify-content-center'>
+            <div class='col-10'>
+                <a class="passreset" href="/resetpass">Forgot Password</a>
+            </div>
+        </div>
+
+        <br>
+
+        <a class="row align-items-center justify-content-center Google-Button" href="/users/auth/google">
+            <div class='col'>
+                <i class="fa-brands fa-google"></i>
+            <!-- </div>
+            <div class='col'> -->
+                Use Google Login
+            </div>
+        </a>
+
+    </div>
+</div>
+
+<!-- <form action="/users/create-session" method="POST">
     <input type="email" name="email" placeholder="Email" required>
     <input type="password" name="password" placeholder="Password" required>
     <input type="submit" value="Sign In">
-</form>
-
-<p>
-    <a href="/users/auth/google">Google SignIn / SignUp</a>
-    <br>
-    <a href="/resetpass">Forgot Password</a>
-</p>
+</form> -->

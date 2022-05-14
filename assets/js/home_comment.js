@@ -25,6 +25,7 @@ class PostComments{
                 data: $(self).serialize(),
                 success: function(data){
                     let newComment = pSelf.newCommentDom(data.data.comment);
+                    $('#comment-data').val('');
                     $(`#post-comments-${postId}`).prepend(newComment);
                     pSelf.deleteComment($(' .delete-comment-button',newComment));
                     likeToggle($(' .newComment'), newComment);
@@ -49,24 +50,23 @@ class PostComments{
 
     //method to create comment in dom
     newCommentDom(comment){
-        return $(`<li id="comment-${comment._id}">        
-                    <p>
-                    <small>
-                            <a  class="delete-comment-button" href="/comments/destroy/${comment._id}">X</a>
-                    </small>
-                    ${comment.content}
-                    <br>
-                    <small>
-                        ${comment.user.name}
-                    </small>
-                    <br>
-                    <small>
-                        <a class="toggle-like-button newComment" data-likes="0" href="/likes/toggle/?id=${comment._id}&type=Comment">
-                            0 Likes
-                        </a>
-                    </small>
-                    </p>
-                </li>`);
+        return $(`<li id="comment-${comment._id}">
+            <small id="comment-delete-button">
+                    <a  class="delete-comment-button" href="/comments/destroy/${comment._id}"><i class="fa-solid fa-trash"></i></a>
+            </small>
+            <a id="post-user" href="/users/profile/${comment.user._id}">
+                ${comment.user.name}
+            </a>
+            <small id="like-button">
+                <a class="toggle-like-button newComment" data-likes="0" href="/likes/toggle/?id=${comment._id}&type=Comment">
+                    0 Likes
+                </a>
+            </small>
+            <br>
+            <div id="comment-content">
+                ${comment.content}
+            </div>
+        </li>`);
     }
 
     //method to delete comment

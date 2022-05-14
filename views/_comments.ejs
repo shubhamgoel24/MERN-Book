@@ -1,20 +1,13 @@
 <li id="comment-<%= comment.id %>">
-    
-    <p>
         <% if((locals.user) && (locals.user.id == comment.user.id)){ %>
-                <small>
-                        <a  class="delete-comment-button" href="/comments/destroy/<%= comment.id %>">X</a>
+                <small id="comment-delete-button">
+                        <a  class="delete-comment-button" href="/comments/destroy/<%= comment.id %>"><i class="fa-solid fa-trash"></i></a>
                 </small>        
         <% } %>
-        <%= comment.content %>
-        <br>
-        <small>
+        <a id="post-user" href="/users/profile/<%= comment.user.id %>">
                 <%= comment.user.name %>
-        </small>
-
-        <!-- display likes. if user is logged in the also toggle of likes -->
-        <br>
-        <small>
+        </a>
+        <small id="like-button">
                 <% if(locals.user){ %>
                         <a class="toggle-like-button" data-likes="<%= comment.likes.length %>" href="/likes/toggle/?id=<%= comment._id %>&type=Comment">
                                 <%= comment.likes.length %> Likes
@@ -23,6 +16,8 @@
                         <%= comment.likes.length %> Likes
                 <% } %>
         </small>
-
-    </p>
+        <br>
+        <div id="comment-content">
+                <%= comment.content %>
+        </div>
 </li>

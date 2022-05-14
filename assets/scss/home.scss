@@ -1,30 +1,70 @@
 #feed-posts{
     height: 88.5vh;
-    width: 40vw;
+    width: 60vw;
     overflow-y: scroll;
     display: inline-block;
+    position: absolute;
+    left: 0px;
     margin: auto;
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
     // background-color: rgba(255,255,255,0.3);
-    backdrop-filter: blur(10px) ;  
 }
 body{
-    margin-top: 6vh;
+    margin-top: 6.5vh;
 }
 #feed-posts::-webkit-scrollbar {
     display: none;
   }
 
-#user-friends{
-    width: 30vw;
-    display: inline-block;
-    position: absolute;
-    right: 5px;
-}
 #users{
-    width: 30vw;
+    width: 40vw;
     display: inline-block;
     position: absolute;
     right: 5px;
-    top: 50vh;
+    a,a:hover{
+        text-decoration: none;
+        color: white;
+    }
+}
+#unactive{
+    display: none;
+}
+
+#posts-list-container{
+    ul li{
+        backdrop-filter:blur(10px);
+        background-color: rgba(255, 255, 255, 0.322);
+        margin-top: 10px;
+        list-style-type:none;
+    }
+}
+#ullist{
+    padding: 0;
+}
+
+#post-delete-button , #comment-delete-button{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    i{
+        color: red;
+    }
+}
+#post-user{
+    position: absolute;
+    top: 10px;
+    left: 30px;
+    text-decoration: none;
+}
+#like-button{
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    a{
+        text-decoration: none;
+    }
+}
+#post-content , #comment-content{
+    margin: 10px;
+    text-align: left;
 }
