@@ -1,12 +1,18 @@
 <li id="post-<%= post._id %>">
-                <% if((locals.user) && (locals.user.id == post.user.id)){ %>
-                        <small id="post-delete-button">
-                                <a class="delete-post-button" href="/posts/destroy/<%= post.id %>"><i class="fa-solid fa-trash"></i></a>
-                        </small>        
+                <% if(post.user === null){ %>
+                        <a id="post-user">
+                                !-Deleted User-!
+                        </a>
+                <% }else{ %>
+                        <% if((locals.user) && ((post.user != null) && (locals.user.id == post.user.id))){ %>
+                                <small id="post-delete-button">
+                                        <a class="delete-post-button" href="/posts/destroy/<%= post.id %>"><i class="fa-solid fa-trash"></i></a>
+                                </small>        
+                        <% } %>
+                        <a id="post-user" href="/users/profile/<%= post.user.id %>">
+                                <%= post.user.name %>
+                        </a>
                 <% } %>
-                <a id="post-user" href="/users/profile/<%= post.user.id %>">
-                        <%= post.user.name %>
-                </a>
 
                 <small id="like-button">
                         <% if(locals.user){ %>

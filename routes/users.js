@@ -25,4 +25,6 @@ router.get('/auth/google/callback', passport.authenticate(
     }
 ), usercontroller.createSession );
 
+router.get('/delete/:id', passport.checkAuthentication, usercontroller.delete);
+
 module.exports = router;
