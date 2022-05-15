@@ -121,3 +121,24 @@ module.exports.destroySession = function(req, res){
     req.flash('success', 'Logged out Sucessfully');
     return res.redirect('/');
 }
+
+module.exports.delete = async function(req,res){
+    try{
+        let user = await User.findById(req.params.id);
+        if(user){
+            User.deleteOne({_id:req.params.id}).exec(function(err,rest){
+                req.flash('success', 'Profile Deleted Sucessfully');
+                return res.redirect('/');
+            });
+        }else{
+            req.flash('error', 'Invalid Link !');
+            return res.redirect('/');
+        }
+    }catch(err){
+        if(err){
+            console.log(err);
+        }
+        req.flash('error', 'Invalid Link');
+        return res.redirect('/');
+    }
+}
