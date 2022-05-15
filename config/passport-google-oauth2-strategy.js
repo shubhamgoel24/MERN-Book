@@ -11,25 +11,48 @@ passport.use(new googleSTrategy({
         callbackURL: env.google_callbackURL
     },
 
-    function(accessToken, refreshToken, profile, done){
-        User.findOne({email: profile.emails[0].value}).exec(function(err,user){
-            if(err){console.log('error in google strategy ',err); return;}
+    // function(accessToken, refreshToken, profile, done){
+    //     User.findOne({email: profile.emails[0].value}).exec(function(err,user){
+    //         if(err){console.log('error in google strategy ',err); return;}
             
 
-            if(user){
-                return done(null,user);
-            }else{
-                User.create({
-                    name: profile.displayName,
-                    email: profile.emails[0].value,
-                    password: crypto.randomBytes(20).toString('hex')
-                }),function(err,user){
-                    if(err){console.log('error in creating user in google strategy ',err); return;}
+    //         if(user){
+    //             return done(null,user);
+    //         }else{
+    //             User.create({
+    //                 name: profile.displayName,
+    //                 email: profile.emails[0].value,
+    //                 password: crypto.randomBytes(20).toString('hex')
+    //             }),function(err,user){
+    //                 if(err){console.log('error in creating user in google strategy ',err); return;}
 
-                    return done(null,user);                    
-                };
-            }
-        });
+    //                 return done(null,user);                    
+    //             };
+    //         }
+    //     });
+    // }
+    async function(accessToken, refreshToken, profile, done) {
+        try{
+            let user;
+            await User.findOne({ email: profile.emails[0].value }).exec(async function(err,userresult){
+                user=userresult;
+                if (user) {
+                    return done(null, user);
+                }else{
+                    user = await User.create({
+                        name: profile.displayName,
+                        email: profile.emails[0].value,
+                        password: crypto.randomBytes(20).toString('hex')
+                    }), function (err, user) {
+                        if (err) { console.log('error in creating user in google strategy ', err); return; }
+                    };
+                    return done(null, user);
+                }
+            });
+        }catch(err){
+            console.log("Error:", err);
+            return;
+        }
     }
 ));
 
