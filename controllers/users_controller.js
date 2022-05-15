@@ -80,6 +80,7 @@ module.exports.signIn = function(req, res){
 //get sign up data
 module.exports.create = function(req, res){
     if(req.body.password != req.body.confirm_password){
+        req.flash('error', 'Password Mismatch !');
         return res.redirect('back');
     }
     User.findOne({email: req.body.email}, function(err,user){
@@ -93,7 +94,16 @@ module.exports.create = function(req, res){
                     console.log("Error in creating user");
                     return;
                 }
-                return res.redirect('/users/sign-in');
+                // return res.redirect('/users/sign-in');
+                req.login(user, function (err) {
+                    if ( ! err ){
+                        req.flash('success', 'Account Created Sucessfully');
+                        res.redirect('/');
+                    } else {
+                        console.log("Error in Loggingin user");
+                        return;
+                    }
+                })
             });
         }
         else{
