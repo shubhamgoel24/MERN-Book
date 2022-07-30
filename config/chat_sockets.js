@@ -4,7 +4,7 @@ module.exports.chatSockets = function(socketServer){
         { 
         cors: { 
             // For Hosting   
-            origin: "https://mernbook.shubhamgoel.tech"
+            origin: "https://mernbook.shubhamgoel24.me"
             
             // For Development
             // origin: "http://localhost:8000"
